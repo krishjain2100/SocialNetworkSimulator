@@ -1,7 +1,6 @@
 #include "post.hpp"
 #include "avl_utils.hpp"
 #include <stack>
-#include <algorithm>
 using namespace std;
 
 Post::Post(const string& s, int t) {

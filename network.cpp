@@ -1,10 +1,10 @@
 #include "network.hpp"
 #include "friends.hpp" 
 #include "utils.hpp"
+#include "priorityqueue.hpp"
 #include <iostream>
 #include <iomanip>
 #include <queue>
-#include <algorithm>
 
 using namespace std; 
 
@@ -75,13 +75,13 @@ void Network::SuggestFriends(const string& username, int N) {
     }
     dist2.erase(node);
     for(auto &p : dist1) dist2.erase(p.first);
-    vector<pair<int,string>> v;
-    for(auto &p : dist2) v.push_back({p.second, p.first->name});
-    sort(v.begin(), v.end(), tie_breaker);
-    if(v.empty()) { cout << "No friend suggestions available" << endl; return; }
-    cout << "Top " << min((int)v.size(), N) << " recommended friends for " << safe_username << ":" << endl;
-    for(int i=0; i < (int)v.size() && i < N; i++) {
-        cout << v[i].second << " (" << v[i].first << (v[i].first > 1 ? " mutuals)" : " mutual)")<< endl;
+    vector<pair<int,string>> candidates;
+    for(auto &p : dist2) candidates.push_back({p.second, p.first->name});
+    candidates = PriorityQueue().heapsort(candidates);
+    if(candidates.empty()) { cout << "No friend suggestions available" << endl; return; }
+    cout << "Top " << min((int)candidates.size(), N) << " recommended friends for " << safe_username << ":" << endl;
+    for(int i=0; i < (int)candidates.size() && i < N; i++) {
+        cout << candidates[i].second << " (" << candidates[i].first << (candidates[i].first > 1 ? " mutuals)" : " mutual)")<< endl;
     }
 }
 

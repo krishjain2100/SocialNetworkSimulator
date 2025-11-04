@@ -1,5 +1,4 @@
 #include "utils.hpp"
-#include <algorithm>
 
 using namespace std;
 
@@ -21,7 +20,7 @@ vector<string> split(const string& s) {
 }
 
 string to_lowercase(string s) {
-    transform(s.begin(), s.end(), s.begin(), [](char c) { return tolower(c); });
+    for (auto &c : s) c = tolower(c);
     return s;
 }
 

@@ -30,6 +30,8 @@ This simulation uses several key data structures, defined across multiple files,
 
 4.  **Generic AVL Logic (`avl_utils.hpp`)**: All templated, generic AVL tree functions (like `balance`, `leftrotate`, `rightrotate`) are centralized in this header file for reuse by both `FriendsAVL` and `PostsAVL`.
 
+5.  **Priority Queue (`priorityqueue.hpp`)**: A small, header-only max-heap implementation specialized for `pair<int,string>` used for ranking (higher int = higher priority; ties broken by lexicographically smaller string). This file is implemented entirely in the header (no `.cpp` required), exposes a `heapsort(...)` helper that returns a sorted vector.
+
 ## Project Structure
 
 The project is broken into logical components for clarity and maintainability:
@@ -42,6 +44,7 @@ The project is broken into logical components for clarity and maintainability:
 * `utils.hpp` / `utils.cpp`: Contains helper functions like `split`, `to_lowercase`, and `time_now`.
 * `avl_utils.hpp`: Contains the generic, templated AVL tree balancing and rotation logic.
 * `compile.sh`: For compiling and executing **all** the cpp files.
+* `priorityqueue.hpp`: Header-only priority queue used for sorting.
 
 ## Available Commands
 
