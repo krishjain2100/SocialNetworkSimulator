@@ -124,7 +124,7 @@ void Network::AddPost(const string& username, const string& content) {
 }
 
 void Network::OutputPosts(const string& username, int N) const {
-    if(N <= 0) { cout << "Error: Please enter a valid number" << endl; return; }
+    if(N <= 0 and N != -1) { cout << "Error: Please enter a valid number" << endl; return; }
     string safe_username = to_lowercase(username);
     if(node_map.find(safe_username) == node_map.end()) {
         cout << "Error: " << safe_username << " does not exist on this network" << endl;
@@ -142,7 +142,7 @@ void Network::OutputPosts(const string& username, int N) const {
 
 bool Network::interface() {
     string input_line;
-    cout << "> ";   // for terminal
+    cout << "> ";
     if(!getline(cin, input_line)) return false;
     if (input_line == "END") return false;
     if (input_line.empty()) return true;

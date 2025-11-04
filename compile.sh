@@ -4,6 +4,6 @@
 
 set -e  
 echo "Compiling SocialNet..."
-g++ -std=c++23 -Wall -Wextra -O2 main.cpp network.cpp user.cpp friends.cpp post.cpp utils.cpp -o socialnet
+g++ -std=c++23 -O2 -Wall -Wextra ./*.cpp -o socialnet
 echo "Running SocialNet..."
 ./socialnet
