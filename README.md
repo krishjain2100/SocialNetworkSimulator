@@ -41,6 +41,7 @@ The project is broken into logical components for clarity and maintainability:
 * `post.hpp` / `post.cpp`: Defines the `Post` struct and the `PostsAVL` class for managing a user's posts.
 * `utils.hpp` / `utils.cpp`: Contains helper functions like `split`, `to_lowercase`, and `time_now`.
 * `avl_utils.hpp`: Contains the generic, templated AVL tree balancing and rotation logic.
+* `compile.sh`: For compiling and executing **all** the cpp files.
 
 ## Available Commands
 
@@ -104,19 +105,22 @@ The application includes robust checks for common edge cases and invalid input:
         * Handles requests for non-existent users ("User does not exist").
         * Correctly prints a message for a valid user who has not made any posts ("... has no posts").
 
-## How to Compile and Run
+# How to Compile and Run
 
-1.  **Compile**
-    You must compile **all** the `.cpp` files together. The header files (`.hpp`) are included automatically by the `.cpp` files.
+## 1. Make the scripts executable (one-time)
+```bash
+chmod +x compile.sh compile_io.sh
+```
 
-    ```bash
-    g++ -std=c++23 -o socialnet main.cpp network.cpp user.cpp friends.cpp post.cpp utils.cpp
-    ```
-    *(You can also use `-std=c++14`, `c++17`, or `c++20` if preferred)*
+## 2. Compile & run (terminal)
+```bash
+./compile.sh
+```
+This script compiles the project (uses `-std=c++23`) and runs the produced `socialnet` binary directly in the terminal.
 
-2.  **Run**
-    Execute the compiled binary:
+## 3. Compile & run (with input/output files)
+```bash
+./compile_io.sh
+```
+This script compiles the project and runs `socialnet` with `input.txt` as stdin and `output.txt` as stdout.
 
-    ```bash
-    ./socialnet
-    ```
