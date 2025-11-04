@@ -114,6 +114,7 @@ void Network::DegreesOfSeparation(const string& user1, const string& user2) {
 }
 
 void Network::AddPost(const string& username, const string& content) {
+    if(content.empty()) { cout << "Error: Post content cannot be empty" << endl; return; }
     string safe_username = to_lowercase(username);
     if(node_map.find(safe_username) == node_map.end()) { 
         cout << "Error: " << safe_username << " does not exist on this network" << endl; 
