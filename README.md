@@ -108,20 +108,26 @@ The application includes robust checks for common edge cases and invalid input:
         * Handles requests for non-existent users ("User does not exist").
         * Correctly prints a message for a valid user who has not made any posts ("... has no posts").
 
-# How to Compile and Run
 
-## 1. Make the scripts executable (one-time)
+## Disclaimer
+* `<content>`: This is the only arguement that allows spaces.
+* All the arguements above and over the required ones will be ignored.
+
+
+## How to Compile and Run
+
+**1. Make the scripts executable (one-time)**
 ```bash
 chmod +x compile.sh compile_io.sh
 ```
 
-## 2. Compile & run (terminal)
+**2. Compile & run (terminal)**
 ```bash
 ./compile.sh
 ```
 This script compiles the project (uses `-std=c++23`) and runs the produced `socialnet` binary directly in the terminal.
 
-## 3. Compile & run (with input/output files)
+**3. Compile & run (with input/output files)**
 ```bash
 ./compile_io.sh
 ```
