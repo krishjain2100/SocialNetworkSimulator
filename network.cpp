@@ -5,7 +5,7 @@
 #include <iomanip>
 #include <queue>
 #include <algorithm>
-#include <exception>
+
 using namespace std; 
 
 Network::Network() {}
@@ -40,7 +40,7 @@ void Network::AddFriend(const string& user1, const string& user2) {
         cout << "Friendship added between " << safe_user1 << " and " << safe_user2 << endl;
         node2->friends->insert(node1); 
     }
-    else cout << "Error: Friendship already exists" << endl;
+    else cout << "Error: " << safe_user1 << " and " << safe_user2 << " are already friends" << endl;
 }
 
 void Network::ListFriends(const string& username) const {
@@ -81,7 +81,7 @@ void Network::SuggestFriends(const string& username, int N) {
     if(v.empty()) { cout << "No friend suggestions available" << endl; return; }
     cout << "Top " << min((int)v.size(), N) << " recommended friends for " << safe_username << ":" << endl;
     for(int i=0; i < (int)v.size() && i < N; i++) {
-        cout << v[i].second << " with " << v[i].first << " mutuals" << endl;
+        cout << v[i].second << " (" << v[i].first << (v[i].first > 1 ? " mutuals)" : " mutual)")<< endl;
     }
 }
 
@@ -94,6 +94,10 @@ void Network::DegreesOfSeparation(const string& user1, const string& user2) {
     }
     User* node1 = node_map[safe_user1];
     User* node2 = node_map[safe_user2];
+    if(node1 == node2) { 
+        cout << "Distance between " << safe_user1 << " and " << safe_user2 << " is 0" << endl; 
+        return; 
+    }
     unordered_map<User*, int> mp; 
     queue<User*> q;
     mp[node1] = 0;
@@ -138,9 +142,8 @@ void Network::OutputPosts(const string& username, int N) const {
 
 bool Network::interface() {
     string input_line;
-    cout << "> ";                                    // for terminal
-    if(!getline(cin, input_line)) return false;      // for terminal
-    // if(!getline(cin, input_line)) return false; // for file input
+    cout << "> ";   // for terminal
+    if(!getline(cin, input_line)) return false;
     if (input_line == "END") return false;
     if (input_line.empty()) return true;
     vector<string> input_split = split(input_line);
@@ -156,6 +159,7 @@ bool Network::interface() {
         else if (command == "OUTPUT_POSTS" && input_split.size() > 2) OutputPosts(input_split[1], stoi(input_split[2]));
         else cout << "Error: Invalid command or insufficient arguments." << endl;
     }
+    catch (invalid_argument& e) { cout << "Error: Please enter a valid number" << endl; }
     catch (exception& e) { cout << "Error processing command: " << e.what() << endl; }
     return true;
 }

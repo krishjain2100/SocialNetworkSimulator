@@ -1,15 +1,15 @@
 #pragma once
 #include <string>
 #include <vector>
-#include <ctime>
 using namespace std;
+
 struct Post {
     string content;
-    time_t time;
+    int time;
     Post* left;
     Post* right;
     int height;
-    Post(const string& s, time_t t);
+    Post(const string& s, int t);
 };
 
 struct PostsAVL {
@@ -17,8 +17,8 @@ struct PostsAVL {
     int count;
 
     PostsAVL();
-    
-    Post* insertHelper(const string& content, time_t time, Post* node);
-    void insert(const string& content, time_t time);
+
+    Post* insertHelper(const string& content, int time, Post* node);
+    void insert(const string& content, int time);
     void inorder(int N, vector <string> &user_posts) const;
 };

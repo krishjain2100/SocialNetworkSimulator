@@ -24,7 +24,7 @@ This simulation uses several key data structures, defined across multiple files,
     * **Why an AVL Tree?** It stores pointers to `User` objects, sorted by username. This automatically keeps a user's friend list in alphabetical order and guarantees O(log F) time complexity for adding friends and O(F) for iterating (where F is the number of friends).
 
 3.  **Post Feed (`post.hpp` / `post.cpp`)**: Each `User` has a `PostsAVL` object, another **self-balancing AVL Tree**.
-    * **Why an AVL Tree?** It stores `Post` objects, sorted by their `time_t` timestamp.
+    * **Why an AVL Tree?** It stores `Post` objects, sorted by their `global_time` timestamp.
     * This structure ensures that inserting a new post is always O(log P) (where P is the number of posts).
     * Retrieving the **N most recent posts** is an O(N + log P) operation by performing a partial in-order traversal, which is much more efficient than sorting all posts.
 
@@ -84,7 +84,7 @@ The application includes robust checks for common edge cases and invalid input:
     * `ADD_FRIEND`:
         * Prevents friending non-existent users ("Atleast one of the users does not exist").
         * Prevents a user from friending themself ("Cannot friend self").
-        * Prevents re-friending an existing friend ("Friendship already exists").
+        * Prevents re-friending an existing friend ("alice and bob are already friends").
 
 * **Network Analysis**:
     * `LIST_FRIENDS`:
@@ -95,7 +95,7 @@ The application includes robust checks for common edge cases and invalid input:
         * Correctly prints "No friend suggestions available" if there are no friends-of-friends.
     * `DEGREES_OF_SEPARATION`:
         * Handles requests involving non-existent users ("Atleast one of the users does not exist").
-        * Correctly returns `0` when calculating the distance from a user to themself.
+        * Correctly returns `0` when calculating the distance from a user to themself efficiently.
         * Correctly returns `-1` if there is no path between the two users (they are in disconnected components of the graph).
 
 * **Post Management**:

@@ -4,7 +4,7 @@
 #include <algorithm>
 using namespace std;
 
-Post::Post(const string& s, time_t t) {
+Post::Post(const string& s, int t) {
     content = s;
     time = t;
     left = right = nullptr;
@@ -16,14 +16,14 @@ PostsAVL::PostsAVL() {
     count = 0; 
 }
 
-Post* PostsAVL::insertHelper(const string& content, time_t time, Post* node) {
+Post* PostsAVL::insertHelper(const string& content, int time, Post* node) {
     if(!node) { count++; return new Post(content, time); }
     if(time > node->time) node->left = insertHelper(content, time, node->left);
     else  node->right = insertHelper(content, time, node->right);
     return balance(node);
 }
 
-void PostsAVL::insert(const string& content, time_t time) { 
+void PostsAVL::insert(const string& content, int time) { 
     root = insertHelper(content, time, root);
 }
 

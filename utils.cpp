@@ -1,9 +1,9 @@
 #include "utils.hpp"
-#include <chrono>
-#include <ctime>
 #include <algorithm>
+
 using namespace std;
-using namespace chrono;
+
+int global_time = 0;
 
 vector<string> split(const string& s) {
     vector<string> parts;
@@ -25,9 +25,8 @@ string to_lowercase(string s) {
     return s;
 }
 
-std::time_t time_now() { 
-    auto now = system_clock::now(); 
-    return system_clock::to_time_t(now);
+int time_now() {
+    return global_time++;
 }
 
 bool tie_breaker(const pair<int,string> &a, const pair<int,string> &b){
